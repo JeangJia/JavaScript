@@ -31,8 +31,9 @@
         },
       }
       const a = new Star('张三', 18)
-      console.log(a.name)
       console.log(Star.prototype.constructor === Star)
+      console.log(a.__proto__)
+      console.log(Star.prototype)
     </script>
   </body>
 </html>
