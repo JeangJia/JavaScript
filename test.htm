@@ -4,35 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      .box {
-        margin: 0 auto;
-        width: 400px;
-        margin-top: 100px;
-        padding: 20px;
-      }
-    </style>
   </head>
   <body>
     <script>
-      const Star = function (name, age) {
+      function Star(name, age) {
         this.name = name
         this.age = age
       }
-      console.log(Star.prototype.constructor === Star)
       Star.prototype = {
-        // constructor: Star,
+        constructor: Star,
         sing: function () {
           console.log('唱歌')
         },
-        dance: function () {
-          console.log('跳舞')
-        },
       }
       const a = new Star('张三', 18)
-      console.log(Star.prototype.constructor === Star)
-      console.log(a.__proto__)
-      console.log(Star.prototype)
+      a.sing()
+      // 1. 实例的 __proto__ 指向构造函数的 prototype（也就是原型对象）
+      //   console.log(a.__proto__ == Star.prototype)
     </script>
   </body>
 </html>
