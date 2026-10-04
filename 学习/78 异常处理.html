@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+            throw 抛出异常
+            try 捕获异常
+            catch 捕获异常
+            finally 无论是否有异常都会执行
+            throw 抛出异常后, 后续代码不会执行
+        */
+      test = () => {
+        console.log('test 函数开始执行')
+        throw new Error('抛出异常')
+        console.log('test 函数执行结束')
+      }
+      try {
+        test()
+      } catch (e) {
+        console.log('捕获到异常:', e)
+      } finally {
+        console.log('无论是否有异常都会执行')
+      }
+    </script>
+  </body>
+</html>
