@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: 'zs',
+        age: 18,
+      }
+      //call 改变this指向 并执行函数
+      const fn1 = function (a, b) {
+        console.log(this)
+        console.log(a, b)
+      }
+      fn1.call(obj, 1, 2)
+      //apply 改变this指向 第二个参数是数组 并执行函数
+      const fn2 = function (...a) {
+        console.log(this)
+        console.log(a)
+        console.log(Math.max(...a))
+      }
+      fn2.apply(obj, [1, 2, 3, 4, 5])
+
+      // 利用Math和apply 求数组中的最大值
+      const arr = [123, 34, 23, 67, 34]
+      console.log(Math.max.apply(null, arr))
+
+      //   bind 改变this指向 不执行 返回一个新的函数
+      const fn3 = fn2.bind(obj, 1, 2)
+      fn3()
+    </script>
+  </body>
+</html>
