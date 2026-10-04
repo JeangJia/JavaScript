@@ -27,22 +27,19 @@
       //   防抖 debounce: 事件不停触发就【一直不执行】, 停下来 delay 后才执行最后一次
       //   节流 throttle: 事件持续触发也【按固定频率执行】, 不会一直等待
 
-      // 写法1: 时间戳版(推荐) —— 第一次触发立即执行, 之后每隔 delay 最多执行一次
+      // 写法1: 时间戳版 —— 第一次触发立即执行, 之后每隔 delay 最多执行一次
       const throttle = (fn, delay = 1000) => {
         let lastTime = 0 // 上一次执行的时间戳; 初值为 0, 所以第一次触发一定满足条件
         return function () {
           const now = Date.now() // 也可以是 +new Date()
           if (now - lastTime >= delay) {
-            // 距离上次执行已经超过 delay, 这次可以执行
-            fn.apply(this, arguments) // 把 this 和参数转交给原函数
-            lastTime = now // 记录本次执行时间
+            fn.apply(this, arguments)
+            lastTime = now
           }
-          // 没到时间就什么都不做, 直接忽略这次触发
         }
       }
 
       document.querySelector('div').addEventListener('mousemove', throttle(add, 1000))
-
       /* ---------- 写法2: 定时器版(首次延迟 delay 执行, 最后一次一定执行) ----------
       const throttle2 = (fn, delay = 1000) => {
         let timer = null
@@ -54,7 +51,6 @@
           }, delay)
         }
       }
-
       两版差异:
         时间戳版: 立即执行【第一次】, 但停止触发时若未到间隔, 最后一次不会执行
         定时器版: 第一次要等 delay 才执行, 但停止触发后【最后一次】一定会执行
