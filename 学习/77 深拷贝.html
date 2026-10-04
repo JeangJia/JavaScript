@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: 'jenag',
+        age: 19,
+        hobby: ['coding', 'listen to music'],
+        info: {
+          height: 1.7,
+          weight: 50,
+        },
+      }
+
+      // 递归实现深拷贝: 遇到引用类型就继续往里复制一层, 直到基本类型为止
+      const deepCopy = (oldObj) => {
+        // 1. 先按【源值】的类型建好同类型的空容器(数组 或 对象)
+        const newObj = Array.isArray(oldObj) ? [] : {}
+        for (const k in oldObj) {
+          if (!Object.hasOwn(oldObj, k)) continue
+          const value = oldObj[k]
+          // 2. 判断的是【源值】: 引用类型继续递归, 基本类型直接赋值
+          newObj[k] = value !== null && typeof value === 'object' ? deepCopy(value) : value
+        }
+        return newObj
+      }
+
+      /* ----------  (newObj, oldObj) 双参数写法 ----------*/
+      const deepCopy2 = (newObj, oldObj) => {
+        for (const k in oldObj) {
+          if (!Object.hasOwn(oldObj, k)) continue
+          const value = oldObj[k]
+          if (value !== null && typeof value === 'object') {
+            newObj[k] = Array.isArray(value) ? [] : {} // 容器类型跟着【源值】走
+            deepCopy2(newObj[k], value) // 递归填充这个新容器
+          } else {
+            newObj[k] = value
+          }
+        }
+        return newObj
+      }
+
+      const newObj1 = deepCopy(obj)
+      //   JSON 转换 深拷贝
+      const newObj2 = JSON.parse(JSON.stringify(obj))
+
+      newObj1.name = 'ls'
+      newObj1.info.height = 1.8
+      newObj2.hobby.push('sing')
+
+      console.log('原对象 obj:', obj)
+      console.log('新对象 newObj:', newObj1)
+      console.log('新对象 newObj2:', newObj2)
+    </script>
+  </body>
+</html>
