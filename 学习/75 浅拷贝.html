@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: 'zs',
+        age: 18,
+        hobby: ['唱', '跳', 'rap', '篮球'],
+      }
+      // 浅拷贝
+      // 1.展开运算符
+      //   const newObj = { ...obj }
+      // 2.Object.assign()
+      const newObj = Object.assign({}, obj)
+
+      newObj.name = 'ls'
+      // 浅拷贝只会拷贝第一层 引用类型仍然是同一个对象
+      // hobby 是引用类型 会影响原对象
+      newObj.hobby.push('kun')
+
+      console.log(newObj)
+      console.log(obj)
+    </script>
+  </body>
+</html>
